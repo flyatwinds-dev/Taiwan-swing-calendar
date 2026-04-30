@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台灣搖擺舞活動行事曆</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream: #F7F3EE;
+  --dark: #1A1410;
+  --brown: #8B5E3C;
+  --gold: #C4973A;
+  --muted: #6B5D52;
+  --border: rgba(139,94,60,0.15);
+  --taipei: #2D6A9F;
+  --hsinchu: #3A7D44;
+  --taichung: #C4973A;
+  --tainan: #B85C3A;
+  --kaohsiung: #7B3F9E;
+}
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  min-height: 100vh;
+}
+
+/* NAV */
+nav {
+  background: var(--dark);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  color: var(--gold);
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+}
+.nav-sub {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.nav-cal-btn {
+  background: var(--gold);
+  color: var(--dark);
+  border: none;
+  border-radius: 100px;
+  padding: 0.4rem 1rem;
+  font-size: 0.78rem;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* HERO */
+.hero {
+  background: var(--dark);
+  padding: 4rem 2rem 3.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(196,151,58,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 50%, rgba(139,94,60,0.07) 0%, transparent 55%);
+}
+.hero-tag {
+  display: inline-block;
+  background: rgba(196,151,58,0.12);
+  color: var(--gold);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  padding: 0.3rem 1rem;
+  border-radius: 100px;
+  margin-bottom: 1.5rem;
+  border: 0.5px solid rgba(196,151,58,0.25);
+  position: relative;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+.hero h1 em {
+  color: var(--gold);
+  font-style: italic;
+}
+.hero p {
+  color: rgba(255,255,255,0.45);
+  font-size: 0.88rem;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  position: relative;
+}
+
+/* STATS */
+.stats-bar {
+  background: var(--gold);
+  display: flex;
+  justify-content: center;
+  gap: 0;
+}
+.stat {
+  text-align: center;
+  padding: 0.9rem 2.5rem;
+  border-right: 0.5px solid rgba(26,20,16,0.12);
+}
+.stat:last-child { border-right: none; }
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--dark);
+  display: block;
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.65rem;
+  color: rgba(26,20,16,0.6);
+  letter-spacing: 0.1em;
+  margin-top: 3px;
+  display: block;
+}
+
+/* LOADING */
+.loading-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--muted);
+}
+.spinner {
+  width: 36px; height: 36px;
+  border: 2px solid var(--border);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 1rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.error-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--muted);
+}
+
+/* FILTERS */
+.filters-section {
+  padding: 1.75rem 2rem 0;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.filters-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.filter-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin-right: 0.25rem;
+}
+.filter-btn {
+  background: white;
+  border: 0.5px solid var(--border);
+  border-radius: 100px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.78rem;
+  font-family: 'Noto Sans TC', sans-serif;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.18s;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.filter-btn:hover { border-color: var(--brown); color: var(--brown); }
+.filter-btn.active { background: var(--dark); border-color: var(--dark); color: white; }
+.dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+/* MAIN */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.75rem 2rem 5rem;
+}
+
+/* SECTION TITLE */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--dark);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 0.5px;
+  background: var(--border);
+}
+
+/* FESTIVAL CARDS */
+.festival-list { margin-bottom: 2.5rem; }
+.festival-card {
+  background: var(--dark);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  color: white;
+  transition: transform 0.18s;
+}
+.festival-card:hover { transform: translateX(4px); }
+.festival-date-block { text-align: center; min-width: 52px; }
+.festival-month { font-size: 0.65rem; letter-spacing: 0.12em; color: rgba(196,151,58,0.7); }
+.festival-day { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); line-height: 1; }
+.festival-info { flex: 1; }
+.festival-name { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.3rem; }
+.festival-sub { font-size: 0.75rem; color: rgba(255,255,255,0.45); display: flex; gap: 0.75rem; }
+.festival-area-tag {
+  font-size: 0.65rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+  background: rgba(196,151,58,0.12);
+  color: var(--gold);
+  border: 0.5px solid rgba(196,151,58,0.25);
+  white-space: nowrap;
+}
+
+/* WEEK SECTIONS */
+.week-section { margin-bottom: 2rem; }
+.week-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 0.5px solid var(--border);
+}
+.week-date { font-family: 'Playfair Display', serif; font-size: 1rem; }
+.week-day { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; }
+.week-count { margin-left: auto; font-size: 0.7rem; color: var(--muted); }
+
+/* EVENT CARDS */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 0.85rem;
+}
+.event-card {
+  background: white;
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.15rem;
+  transition: all 0.18s;
+  position: relative;
+  overflow: hidden;
+}
+.event-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+}
+.event-card.taipei::before { background: var(--taipei); }
+.event-card.hsinchu::before { background: var(--hsinchu); }
+.event-card.taichung::before { background: var(--taichung); }
+.event-card.tainan::before { background: var(--tainan); }
+.event-card.kaohsiung::before { background: var(--kaohsiung); }
+.event-card:hover {
+  border-color: rgba(139,94,60,0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26,20,16,0.07);
+}
+.event-area {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.07em;
+  margin-bottom: 0.4rem;
+}
+.area-dot { width: 6px; height: 6px; border-radius: 50%; }
+.event-name { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.25rem; line-height: 1.4; }
+.event-org { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.65rem; }
+.event-footer { display: flex; align-items: center; gap: 0.6rem; font-size: 0.72rem; color: var(--muted); }
+.event-time { display: flex; align-items: center; gap: 0.2rem; }
+.event-venue { display: flex; align-items: center; gap: 0.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.type-badge {
+  margin-left: auto;
+  font-size: 0.62rem;
+  padding: 0.18rem 0.5rem;
+  border-radius: 100px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.badge-social { background: #E8F4EC; color: #2D6B3A; }
+.badge-festival { background: #FEF3E2; color: #9B6B10; }
+.badge-workshop { background: #EEF2FE; color: #3B4CC0; }
+.badge-other { background: #F2F2F2; color: #555; }
+
+.no-events {
+  text-align: center;
+  padding: 3rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+/* FOOTER */
+footer {
+  background: var(--dark);
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+}
+footer a { color: var(--gold); text-decoration: none; }
+
+@media (max-width: 600px) {
+  .stat { padding: 0.75rem 1.2rem; }
+  .stat-num { font-size: 1.2rem; }
+  nav { padding: 0 1rem; }
+  main { padding: 1.25rem 1rem 4rem; }
+  .filters-section { padding: 1.25rem 1rem 0; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div>
+    <div class="nav-logo">Taiwan Swing 🎷</div>
+    <div class="nav-sub">台灣搖擺舞活動行事曆</div>
+  </div>
+  <div class="nav-right">
+    <a class="nav-cal-btn" id="cal-subscribe-btn" href="#" target="_blank">＋ 訂閱行事曆</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">TAIWAN SWING COMMUNITY</div>
+  <h1>台灣<em>搖擺舞</em>活動總覽</h1>
+  <p>集結全台北・新竹・台中・台南・高雄的搖擺舞活動資訊</p>
+</div>
+
+<div class="stats-bar">
+  <div class="stat">
+    <span class="stat-num" id="stat-events">—</span>
+    <span class="stat-label">近期活動</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">5</span>
+    <span class="stat-label">活躍城市</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num" id="stat-orgs">—</span>
+    <span class="stat-label">組織團體</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">每週</span>
+    <span class="stat-label">持續更新</span>
+  </div>
+</div>
+
+<div class="filters-section">
+  <div class="filters-row">
+    <span class="filter-label">地區</span>
+    <button class="filter-btn active" onclick="filterArea('all', this)">全部</button>
+    <button class="filter-btn" onclick="filterArea('台北', this)">
+      <span class="dot" style="background:var(--taipei)"></span>台北
+    </button>
+    <button class="filter-btn" onclick="filterArea('新竹', this)">
+      <span class="dot" style="background:var(--hsinchu)"></span>新竹
+    </button>
+    <button class="filter-btn" onclick="filterArea('台中', this)">
+      <span class="dot" style="background:var(--taichung)"></span>台中
+    </button>
+    <button class="filter-btn" onclick="filterArea('台南', this)">
+      <span class="dot" style="background:var(--tainan)"></span>台南
+    </button>
+    <button class="filter-btn" onclick="filterArea('高雄', this)">
+      <span class="dot" style="background:var(--kaohsiung)"></span>高雄
+    </button>
+  </div>
+</div>
+
+<main>
+  <div id="app">
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>載入活動資料中⋯</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  資料來源：台灣搖擺舞行事曆 ｜ 由 <a href="https://www.instagram.com/flyatwinds" target="_blank">@flyatwinds</a> 維護<br>
+  如有資訊出入，以各組織公告為基準 ｜ 歡迎私訊補充活動資訊 💌
+</footer>
+
+<script>
+// ================================================
+// 設定區（上線前填入你的行事曆網址）
+// ================================================
+const CALENDAR_ICAL_URL = 'https://calendar.google.com/calendar/ical/4a5afdd150defea45de935cae0c55f36feb3d093bd3d8151de32d7ff03b390db%40group.calendar.google.com/public/basic.ics';
+const CORS_PROXY = 'https://corsproxy.io/?';
+const CAL_SUBSCRIBE_URL = 'https://calendar.google.com/calendar/r?cid=4a5afdd150defea45de935cae0c55f36feb3d093bd3d8151de32d7ff03b390db@group.calendar.google.com';
+
+// ================================================
+// 地區設定
+// ================================================
+const AREA_COLORS = {
+  '台北': 'taipei', '新竹': 'hsinchu',
+  '台中': 'taichung', '台南': 'tainan', '高雄': 'kaohsiung'
+};
+const AREA_DOT_COLORS = {
+  '台北': 'var(--taipei)', '新竹': 'var(--hsinchu)',
+  '台中': 'var(--taichung)', '台南': 'var(--tainan)', '高雄': 'var(--kaohsiung)'
+};
+const MONTHS_EN = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+const WEEKDAYS_ZH = ['日','一','二','三','四','五','六'];
+
+// ================================================
+// 全域狀態
+// ================================================
+let allEvents = [];
+let currentFilter = 'all';
+
+// ================================================
+// 解析 iCal 格式
+// ================================================
+function parseICal(text) {
+  const events = [];
+  const blocks = text.split('BEGIN:VEVENT');
+  blocks.shift();
+
+  blocks.forEach(block => {
+    const get = (key) => {
+      const patterns = [
+        new RegExp(`${key};[^:]*:([^\r\n]+)`),
+        new RegExp(`${key}:([^\r\n]+)`)
+      ];
+      for (const p of patterns) {
+        const m = block.match(p);
+        if (m) return m[1].trim();
+      }
+      return '';
+    };
+
+    const summary  = get('SUMMARY').replace(/\\,/g, ',').replace(/\\n/g, ' ');
+    const location = get('LOCATION').replace(/\\,/g, ',');
+    const desc     = get('DESCRIPTION').replace(/\\n/g, '\n').replace(/\\,/g, ',');
+    const dtstart  = get('DTSTART');
+    const dtend    = get('DTEND');
+
+    if (!summary || !dtstart) return;
+
+    // 解析日期
+    const parseDate = (s) => {
+      if (!s) return null;
+      s = s.replace(/[TZ]/g, '').replace(/\s/g, '');
+      if (s.length === 8) {
+        return new Date(
+          parseInt(s.slice(0,4)),
+          parseInt(s.slice(4,6))-1,
+          parseInt(s.slice(6,8)),
+          0, 0, 0
+        );
+      }
+      return new Date(
+        parseInt(s.slice(0,4)),
+        parseInt(s.slice(4,6))-1,
+        parseInt(s.slice(6,8)),
+        parseInt(s.slice(8,10)||0),
+        parseInt(s.slice(10,12)||0)
+      );
+    };
+
+    const start = parseDate(dtstart);
+    const end   = parseDate(dtend);
+    if (!start) return;
+
+    // 從 description 解析地區、組織、主題
+    const getDescField = (label) => {
+      const m = desc.match(new RegExp(`${label}[：:]([^\n]+)`));
+      return m ? m[1].trim() : '';
+    };
+
+    const area = getDescField('地區');
+    const org  = getDescField('組織');
+    const type = getDescField('主題');
+    const isAllDay = dtstart.length === 8;
+    const isMultiDay = isAllDay && end && (end - start) > 86400000;
+    const isPending = summary.includes('時間待確認');
+    const isFestival = summary.startsWith('📆');
+
+    events.push({
+      summary: summary.replace(/^[⏳📆\s]+/, '').replace('（時間待確認）', '').replace(/^\[.*?\]\s*/, ''),
+      location,
+      area,
+      org,
+      type,
+      start,
+      end,
+      isAllDay,
+      isMultiDay,
+      isPending,
+      isFestival
+    });
+  });
+
+  return events.sort((a, b) => a.start - b.start);
+}
+
+// ================================================
+// 取得地區 class
+// ================================================
+function areaClass(area) {
+  return AREA_COLORS[area] || '';
+}
+
+// ================================================
+// 取得活動類型 badge
+// ================================================
+function typeBadge(type) {
+  if (!type) return '';
+  const t = type.toLowerCase();
+  if (t.includes('social') || t.includes('小舞會')) return `<span class="type-badge badge-social">Social</span>`;
+  if (t.includes('festival') || t.includes('系列') || t.includes('大舞會') || t.includes('比賽')) return `<span class="type-badge badge-festival">大型活動</span>`;
+  if (t.includes('workshop') || t.includes('課')) return `<span class="type-badge badge-workshop">Workshop</span>`;
+  return `<span class="type-badge badge-other">${type}</span>`;
+}
+
+// ================================================
+// 格式化時間
+// ================================================
+function formatTime(date) {
+  if (!date) return '';
+  const h = String(date.getHours()).padStart(2,'0');
+  const m = String(date.getMinutes()).padStart(2,'0');
+  return `${h}:${m}`;
+}
+
+// ================================================
+// 渲染大型活動
+// ================================================
+function renderFestivals(events) {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const festivals = events.filter(e =>
+    e.isFestival && e.start >= today
+  ).slice(0, 6);
+
+  if (festivals.length === 0) return '';
+
+  const cards = festivals.map(e => {
+    const dateRange = e.isMultiDay && e.end
+      ? `${e.start.getMonth()+1}/${e.start.getDate()} – ${e.end.getMonth()+1}/${e.end.getDate()-1}`
+      : `${e.start.getMonth()+1}/${e.start.getDate()}`;
+
+    return `
+      <div class="festival-card">
+        <div class="festival-date-block">
+          <div class="festival-month">${MONTHS_EN[e.start.getMonth()]}</div>
+          <div class="festival-day">${e.start.getDate()}</div>
+        </div>
+        <div class="festival-info">
+          <div class="festival-name">${e.summary}</div>
+          <div class="festival-sub">
+            <span>📅 ${dateRange}</span>
+            ${e.location ? `<span>📍 ${e.location}</span>` : ''}
+            ${e.isPending ? '<span>⏳ 時間待確認</span>' : ''}
+          </div>
+        </div>
+        ${e.area ? `<span class="festival-area-tag">${e.area}</span>` : ''}
+      </div>`;
+  }).join('');
+
+  return `
+    <div class="festival-list">
+      <div class="section-title">大型活動搶先看</div>
+      ${cards}
+    </div>`;
+}
+
+// ================================================
+// 渲染本週活動
+// ================================================
+function renderWeekEvents(events, filter) {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const dayOfWeek = today.getDay();
+  const monday = new Date(today);
+  monday.setDate(today.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1));
+  const sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
+  sunday.setHours(23,59,59);
+
+  let filtered = events.filter(e =>
+    !e.isFestival && !e.isAllDay && e.start >= monday && e.start <= sunday
+  );
+
+  if (filter !== 'all') {
+    filtered = filtered.filter(e => e.area === filter);
+  }
+
+  if (filtered.length === 0) {
+    return `<div class="no-events">本週${filter !== 'all' ? '・'+filter : ''}暫無活動資料</div>`;
+  }
+
+  // 按日期分組
+  const byDate = {};
+  filtered.forEach(e => {
+    const key = `${e.start.getFullYear()}-${String(e.start.getMonth()+1).padStart(2,'0')}-${String(e.start.getDate()).padStart(2,'0')}`;
+    if (!byDate[key]) byDate[key] = [];
+    byDate[key].push(e);
+  });
+
+  let html = '<div class="section-title">本週活動</div>';
+
+  Object.keys(byDate).sort().forEach(key => {
+    const parts = key.split('-');
+    const d = new Date(parseInt(parts[0]), parseInt(parts[1])-1, parseInt(parts[2]));
+    const dayEvents = byDate[key];
+
+    const cards = dayEvents.map(e => {
+      const cls = areaClass(e.area);
+      const dotColor = AREA_DOT_COLORS[e.area] || '#999';
+      const timeStr = e.isAllDay ? '全天' : `${formatTime(e.start)}–${formatTime(e.end)}`;
+      return `
+        <div class="event-card ${cls}">
+          <div class="event-area">
+            <span class="area-dot" style="background:${dotColor}"></span>
+            ${e.area || ''}
+          </div>
+          <div class="event-name">${e.summary}</div>
+          <div class="event-org">${e.org || ''}</div>
+          <div class="event-footer">
+            <span class="event-time">🕐 ${timeStr}</span>
+            ${e.location ? `<span class="event-venue">📍 ${e.location}</span>` : ''}
+            ${typeBadge(e.type)}
+          </div>
+        </div>`;
+    }).join('');
+
+    html += `
+      <div class="week-section">
+        <div class="week-header">
+          <span class="week-date">${d.getMonth()+1} / ${d.getDate()}</span>
+          <span class="week-day">週${WEEKDAYS_ZH[d.getDay()]}</span>
+          <span class="week-count">${dayEvents.length} 個活動</span>
+        </div>
+        <div class="events-grid">${cards}</div>
+      </div>`;
+  });
+
+  return html;
+}
+
+// ================================================
+// 渲染整頁
+// ================================================
+function render() {
+  const app = document.getElementById('app');
+  const festivalHtml = renderFestivals(allEvents);
+  const weekHtml = renderWeekEvents(allEvents, currentFilter);
+  app.innerHTML = festivalHtml + weekHtml;
+
+  // 更新統計數字
+  const today = new Date(); today.setHours(0,0,0,0);
+  const upcoming = allEvents.filter(e => e.start >= today && !e.isFestival && !e.isAllDay);
+  document.getElementById('stat-events').textContent = upcoming.length;
+
+  const orgs = new Set(allEvents.map(e => e.org).filter(Boolean));
+  document.getElementById('stat-orgs').textContent = orgs.size;
+}
+
+// ================================================
+// 地區篩選
+// ================================================
+function filterArea(area, btn) {
+  currentFilter = area;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+// ================================================
+// 載入行事曆資料
+// ================================================
+async function loadCalendar() {
+  const app = document.getElementById('app');
+
+  if (CALENDAR_ICAL_URL === 'https://calendar.google.com/calendar/ical/4a5afdd150defea45de935cae0c55f36feb3d093bd3d8151de32d7ff03b390db%40group.calendar.google.com/public/basic.ics') {
+    app.innerHTML = `
+      <div class="error-state">
+        <p style="font-size:2rem;margin-bottom:1rem">🎷</p>
+        <p>網站設定中，即將上線！</p>
+        <p style="margin-top:0.5rem;font-size:0.8rem;opacity:0.6">Taiwan Swing Calendar</p>
+      </div>`;
+    return;
+  }
+
+  try {
+    const res = await fetch(CORS_PROXY + encodeURIComponent(CALENDAR_ICAL_URL));
+    if (!res.ok) throw new Error('fetch failed');
+    const text = await res.text();
+    allEvents = parseICal(text);
+    render();
+  } catch (err) {
+    app.innerHTML = `
+      <div class="error-state">
+        <p style="font-size:2rem;margin-bottom:1rem">😔</p>
+        <p>活動資料載入失敗，請稍後再試</p>
+        <p style="margin-top:0.5rem;font-size:0.8rem;opacity:0.6">${err.message}</p>
+      </div>`;
+  }
+}
+
+// 設定訂閱連結
+document.getElementById('cal-subscribe-btn').href = CAL_SUBSCRIBE_URL;
+
+// 啟動
+loadCalendar();
+</script>
+</body>
+</html>
