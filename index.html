@@ -441,7 +441,7 @@ footer a { color: var(--gold); text-decoration: none; }
 // 設定區（上線前填入你的行事曆網址）
 // ================================================
 const CALENDAR_ICAL_URL = 'https://calendar.google.com/calendar/ical/4a5afdd150defea45de935cae0c55f36feb3d093bd3d8151de32d7ff03b390db%40group.calendar.google.com/public/basic.ics';
-const CORS_PROXY = 'https://corsproxy.io/?';
+
 const CAL_SUBSCRIBE_URL = 'https://calendar.google.com/calendar/r?cid=4a5afdd150defea45de935cae0c55f36feb3d093bd3d8151de32d7ff03b390db@group.calendar.google.com';
 
 // ================================================
@@ -726,20 +726,11 @@ function filterArea(area, btn) {
 // ================================================
 async function loadCalendar() {
   const app = document.getElementById('app');
-
-  if (CALENDAR_ICAL_URL === 'https://calendar.google.com/calendar/ical/4a5afdd150defea45de935cae0c55f36feb3d093bd3d8151de32d7ff03b390db%40group.calendar.google.com/public/basic.ics') {
-    app.innerHTML = `
-      <div class="error-state">
-        <p style="font-size:2rem;margin-bottom:1rem">🎷</p>
-        <p>網站設定中，即將上線！</p>
-        <p style="margin-top:0.5rem;font-size:0.8rem;opacity:0.6">Taiwan Swing Calendar</p>
-      </div>`;
-    return;
-  }
+  const WORKER_URL = 'https://swing-calendar-proxy.flyatwinds.workers.dev/';
 
   try {
-    const res = await fetch(CORS_PROXY + encodeURIComponent(CALENDAR_ICAL_URL));
-    if (!res.ok) throw new Error('fetch failed');
+    const res = await fetch(WORKER_URL);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     const text = await res.text();
     allEvents = parseICal(text);
     render();
