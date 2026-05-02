@@ -8,358 +8,130 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --cream: #F7F3EE;
-  --dark: #1A1410;
-  --brown: #8B5E3C;
-  --gold: #C4973A;
-  --muted: #6B5D52;
-  --border: rgba(139,94,60,0.15);
-  --taipei: #2D6A9F;
-  --hsinchu: #3A7D44;
-  --taichung: #C4973A;
-  --tainan: #B85C3A;
-  --kaohsiung: #7B3F9E;
+  --cream: #F7F3EE; --dark: #1A1410; --brown: #8B5E3C;
+  --gold: #C4973A; --muted: #6B5D52; --border: rgba(139,94,60,0.15);
+  --taipei: #2D6A9F; --hsinchu: #3A7D44; --taichung: #C4973A;
+  --tainan: #B85C3A; --kaohsiung: #7B3F9E;
 }
-
-body {
-  font-family: 'Noto Sans TC', sans-serif;
-  background: var(--cream);
-  color: var(--dark);
-  min-height: 100vh;
-}
+body { font-family: 'Noto Sans TC', sans-serif; background: var(--cream); color: var(--dark); min-height: 100vh; }
 
 /* NAV */
-nav {
-  background: var(--dark);
-  padding: 0 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 60px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.nav-logo {
-  font-family: 'Playfair Display', serif;
-  color: var(--gold);
-  font-size: 1.15rem;
-  letter-spacing: 0.05em;
-}
-.nav-sub {
-  font-size: 0.7rem;
-  color: rgba(255,255,255,0.35);
-  letter-spacing: 0.1em;
-  margin-top: 2px;
-}
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-.nav-cal-btn {
-  background: var(--gold);
-  color: var(--dark);
-  border: none;
-  border-radius: 100px;
-  padding: 0.4rem 1rem;
-  font-size: 0.78rem;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-weight: 500;
-  cursor: pointer;
-  letter-spacing: 0.05em;
-  text-decoration: none;
-  display: inline-block;
-}
+nav { background: var(--dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; position: sticky; top: 0; z-index: 100; }
+.nav-logo { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.15rem; }
+.nav-sub { font-size: 0.68rem; color: rgba(255,255,255,0.3); letter-spacing: 0.1em; }
+.nav-cal-btn { background: var(--gold); color: var(--dark); border: none; border-radius: 100px; padding: 0.4rem 1rem; font-size: 0.78rem; font-family: 'Noto Sans TC', sans-serif; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-block; }
+.nav-links { display: flex; gap: 1.5rem; list-style: none; }
+.nav-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.82rem; letter-spacing: 0.04em; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--gold); }
 
 /* HERO */
-.hero {
-  background: var(--dark);
-  padding: 4rem 2rem 3.5rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 20% 50%, rgba(196,151,58,0.07) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 50%, rgba(139,94,60,0.07) 0%, transparent 55%);
-}
-.hero-tag {
-  display: inline-block;
-  background: rgba(196,151,58,0.12);
-  color: var(--gold);
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
-  padding: 0.3rem 1rem;
-  border-radius: 100px;
-  margin-bottom: 1.5rem;
-  border: 0.5px solid rgba(196,151,58,0.25);
-  position: relative;
-}
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  color: #fff;
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  line-height: 1.25;
-  margin-bottom: 0.75rem;
-  position: relative;
-}
-.hero h1 em {
-  color: var(--gold);
-  font-style: italic;
-}
-.hero p {
-  color: rgba(255,255,255,0.45);
-  font-size: 0.88rem;
-  font-weight: 300;
-  letter-spacing: 0.06em;
-  position: relative;
-}
+.hero { background: var(--dark); padding: 3.5rem 2rem 3rem; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(196,151,58,0.07) 0%, transparent 55%), radial-gradient(ellipse at 80% 50%, rgba(139,94,60,0.07) 0%, transparent 55%); }
+.hero-tag { display: inline-block; background: rgba(196,151,58,0.12); color: var(--gold); font-size: 0.68rem; letter-spacing: 0.18em; padding: 0.28rem 0.9rem; border-radius: 100px; margin-bottom: 1.25rem; border: 0.5px solid rgba(196,151,58,0.25); position: relative; }
+.hero h1 { font-family: 'Playfair Display', serif; color: #fff; font-size: clamp(1.6rem, 4vw, 2.8rem); line-height: 1.25; margin-bottom: 0.6rem; position: relative; }
+.hero h1 em { color: var(--gold); font-style: italic; }
+.hero p { color: rgba(255,255,255,0.4); font-size: 0.85rem; font-weight: 300; letter-spacing: 0.06em; position: relative; }
 
 /* STATS */
-.stats-bar {
-  background: var(--gold);
-  display: flex;
-  justify-content: center;
-  gap: 0;
-}
-.stat {
-  text-align: center;
-  padding: 0.9rem 2.5rem;
-  border-right: 0.5px solid rgba(26,20,16,0.12);
-}
+.stats-bar { background: var(--gold); display: flex; justify-content: center; }
+.stat { text-align: center; padding: 0.85rem 2.5rem; border-right: 0.5px solid rgba(26,20,16,0.12); }
 .stat:last-child { border-right: none; }
-.stat-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
-  color: var(--dark);
-  display: block;
-  line-height: 1;
-}
-.stat-label {
-  font-size: 0.65rem;
-  color: rgba(26,20,16,0.6);
-  letter-spacing: 0.1em;
-  margin-top: 3px;
-  display: block;
-}
+.stat-num { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--dark); display: block; line-height: 1; }
+.stat-label { font-size: 0.63rem; color: rgba(26,20,16,0.6); letter-spacing: 0.1em; margin-top: 3px; display: block; }
 
-/* LOADING */
-.loading-state {
-  text-align: center;
-  padding: 4rem 2rem;
-  color: var(--muted);
-}
-.spinner {
-  width: 36px; height: 36px;
-  border: 2px solid var(--border);
-  border-top-color: var(--gold);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin: 0 auto 1rem;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
+/* FILTERS BAR */
+.filters-bar { background: white; border-bottom: 0.5px solid var(--border); padding: 0 2rem; position: sticky; top: 60px; z-index: 90; }
+.filters-inner { max-width: 1100px; margin: 0 auto; display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; }
+.filters-inner::-webkit-scrollbar { display: none; }
 
-.error-state {
-  text-align: center;
-  padding: 4rem 2rem;
-  color: var(--muted);
-}
+/* MONTH TABS */
+.month-tabs { display: flex; gap: 0; border-bottom: none; flex-shrink: 0; }
+.month-tab { background: none; border: none; border-bottom: 2px solid transparent; padding: 0.85rem 1.1rem; font-size: 0.8rem; font-family: 'Noto Sans TC', sans-serif; color: var(--muted); cursor: pointer; transition: all 0.18s; white-space: nowrap; letter-spacing: 0.04em; }
+.month-tab:hover { color: var(--dark); }
+.month-tab.active { color: var(--dark); border-bottom-color: var(--gold); font-weight: 500; }
 
-/* FILTERS */
-.filters-section {
-  padding: 1.75rem 2rem 0;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-.filters-row {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.filter-label {
-  font-size: 0.72rem;
-  color: var(--muted);
-  letter-spacing: 0.08em;
-  margin-right: 0.25rem;
-}
-.filter-btn {
-  background: white;
-  border: 0.5px solid var(--border);
-  border-radius: 100px;
-  padding: 0.3rem 0.9rem;
-  font-size: 0.78rem;
-  font-family: 'Noto Sans TC', sans-serif;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.18s;
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-.filter-btn:hover { border-color: var(--brown); color: var(--brown); }
-.filter-btn.active { background: var(--dark); border-color: var(--dark); color: white; }
-.dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+/* DIVIDER */
+.filter-divider { width: 0.5px; background: var(--border); margin: 0.5rem 0.5rem; flex-shrink: 0; }
+
+/* AREA PILLS */
+.area-pills { display: flex; gap: 0.4rem; align-items: center; padding: 0.6rem 0; flex-shrink: 0; }
+.area-pill { background: none; border: 0.5px solid var(--border); border-radius: 100px; padding: 0.25rem 0.75rem; font-size: 0.73rem; font-family: 'Noto Sans TC', sans-serif; color: var(--muted); cursor: pointer; transition: all 0.18s; display: flex; align-items: center; gap: 0.3rem; white-space: nowrap; }
+.area-pill:hover { border-color: var(--brown); color: var(--brown); }
+.area-pill.active { background: var(--dark); border-color: var(--dark); color: white; }
+.dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 
 /* MAIN */
-main {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 1.75rem 2rem 5rem;
-}
+main { max-width: 1100px; margin: 0 auto; padding: 1.5rem 2rem 5rem; }
 
-/* SECTION TITLE */
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
-  color: var(--dark);
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-.section-title::after {
-  content: '';
-  flex: 1;
-  height: 0.5px;
-  background: var(--border);
-}
+/* LOADING / ERROR */
+.loading-state { text-align: center; padding: 4rem 2rem; color: var(--muted); }
+.spinner { width: 32px; height: 32px; border: 2px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.error-state { text-align: center; padding: 4rem 2rem; color: var(--muted); }
 
-/* FESTIVAL CARDS */
-.festival-list { margin-bottom: 2.5rem; }
-.festival-card {
-  background: var(--dark);
-  border-radius: 14px;
-  padding: 1.25rem 1.5rem;
-  margin-bottom: 0.6rem;
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  color: white;
-  transition: transform 0.18s;
-}
-.festival-card:hover { transform: translateX(4px); }
-.festival-date-block { text-align: center; min-width: 52px; }
-.festival-month { font-size: 0.65rem; letter-spacing: 0.12em; color: rgba(196,151,58,0.7); }
-.festival-day { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); line-height: 1; }
+/* MONTH HEADER */
+.month-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; margin-top: 0.5rem; }
+.month-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--dark); }
+.month-title span { font-size: 0.8rem; color: var(--muted); font-family: 'Noto Sans TC', sans-serif; margin-left: 0.5rem; letter-spacing: 0.06em; }
+.month-line { flex: 1; height: 0.5px; background: var(--border); }
+
+/* FESTIVAL STRIP */
+.festival-strip { margin-bottom: 2rem; }
+.festival-strip-title { font-size: 0.7rem; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 0.75rem; }
+.festival-cards { display: flex; flex-direction: column; gap: 0.5rem; }
+.festival-card { background: var(--dark); border-radius: 12px; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem; color: white; transition: transform 0.15s; }
+.festival-card:hover { transform: translateX(3px); }
+.festival-date-block { text-align: center; min-width: 48px; }
+.festival-month-label { font-size: 0.6rem; letter-spacing: 0.12em; color: rgba(196,151,58,0.7); }
+.festival-day { font-family: 'Playfair Display', serif; font-size: 1.75rem; color: var(--gold); line-height: 1; }
 .festival-info { flex: 1; }
-.festival-name { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.3rem; }
-.festival-sub { font-size: 0.75rem; color: rgba(255,255,255,0.45); display: flex; gap: 0.75rem; }
-.festival-area-tag {
-  font-size: 0.65rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 100px;
-  background: rgba(196,151,58,0.12);
-  color: var(--gold);
-  border: 0.5px solid rgba(196,151,58,0.25);
-  white-space: nowrap;
-}
+.festival-name { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.2rem; }
+.festival-sub { font-size: 0.72rem; color: rgba(255,255,255,0.4); display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.festival-area-tag { font-size: 0.63rem; padding: 0.18rem 0.55rem; border-radius: 100px; background: rgba(196,151,58,0.12); color: var(--gold); border: 0.5px solid rgba(196,151,58,0.25); white-space: nowrap; }
 
 /* WEEK SECTIONS */
-.week-section { margin-bottom: 2rem; }
-.week-header {
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  margin-bottom: 0.85rem;
-  padding-bottom: 0.65rem;
-  border-bottom: 0.5px solid var(--border);
-}
-.week-date { font-family: 'Playfair Display', serif; font-size: 1rem; }
-.week-day { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; }
-.week-count { margin-left: auto; font-size: 0.7rem; color: var(--muted); }
+.week-section { margin-bottom: 1.75rem; }
+.week-header { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 0.5px solid var(--border); }
+.week-date { font-family: 'Playfair Display', serif; font-size: 0.95rem; }
+.week-day { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.06em; }
+.week-count { margin-left: auto; font-size: 0.68rem; color: var(--muted); }
+.today-badge { font-size: 0.62rem; background: var(--gold); color: var(--dark); padding: 0.1rem 0.45rem; border-radius: 100px; font-weight: 500; }
 
 /* EVENT CARDS */
-.events-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  gap: 0.85rem;
-}
-.event-card {
-  background: white;
-  border: 0.5px solid var(--border);
-  border-radius: 12px;
-  padding: 1rem 1.15rem;
-  transition: all 0.18s;
-  position: relative;
-  overflow: hidden;
-}
-.event-card::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 3px;
-}
+.events-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.75rem; }
+.event-card { background: white; border: 0.5px solid var(--border); border-radius: 11px; padding: 0.9rem 1.05rem; transition: all 0.15s; position: relative; overflow: hidden; }
+.event-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
 .event-card.taipei::before { background: var(--taipei); }
 .event-card.hsinchu::before { background: var(--hsinchu); }
 .event-card.taichung::before { background: var(--taichung); }
 .event-card.tainan::before { background: var(--tainan); }
 .event-card.kaohsiung::before { background: var(--kaohsiung); }
-.event-card:hover {
-  border-color: rgba(139,94,60,0.25);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(26,20,16,0.07);
-}
-.event-area {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-size: 0.68rem;
-  color: var(--muted);
-  letter-spacing: 0.07em;
-  margin-bottom: 0.4rem;
-}
-.area-dot { width: 6px; height: 6px; border-radius: 50%; }
-.event-name { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.25rem; line-height: 1.4; }
-.event-org { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.65rem; }
-.event-footer { display: flex; align-items: center; gap: 0.6rem; font-size: 0.72rem; color: var(--muted); }
-.event-time { display: flex; align-items: center; gap: 0.2rem; }
-.event-venue { display: flex; align-items: center; gap: 0.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.type-badge {
-  margin-left: auto;
-  font-size: 0.62rem;
-  padding: 0.18rem 0.5rem;
-  border-radius: 100px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
+.event-card:hover { border-color: rgba(139,94,60,0.22); transform: translateY(-2px); box-shadow: 0 5px 18px rgba(26,20,16,0.06); }
+.event-area { display: flex; align-items: center; gap: 0.28rem; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 0.35rem; }
+.area-dot { width: 5px; height: 5px; border-radius: 50%; }
+.event-name { font-size: 0.88rem; font-weight: 500; margin-bottom: 0.2rem; line-height: 1.4; }
+.event-org { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.55rem; }
+.event-footer { display: flex; align-items: center; gap: 0.5rem; font-size: 0.7rem; color: var(--muted); flex-wrap: wrap; }
+.type-badge { margin-left: auto; font-size: 0.6rem; padding: 0.16rem 0.48rem; border-radius: 100px; white-space: nowrap; flex-shrink: 0; }
 .badge-social { background: #E8F4EC; color: #2D6B3A; }
 .badge-festival { background: #FEF3E2; color: #9B6B10; }
 .badge-workshop { background: #EEF2FE; color: #3B4CC0; }
 .badge-other { background: #F2F2F2; color: #555; }
+.badge-tbd { background: #FFF3E0; color: #E65100; }
 
-.no-events {
-  text-align: center;
-  padding: 3rem;
-  color: var(--muted);
-  font-size: 0.88rem;
-}
+/* EMPTY */
+.no-events { text-align: center; padding: 3rem; color: var(--muted); font-size: 0.85rem; }
 
 /* FOOTER */
-footer {
-  background: var(--dark);
-  color: rgba(255,255,255,0.35);
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
-  line-height: 1.8;
-}
+footer { background: var(--dark); color: rgba(255,255,255,0.32); text-align: center; padding: 2rem; font-size: 0.73rem; letter-spacing: 0.05em; line-height: 1.8; }
 footer a { color: var(--gold); text-decoration: none; }
 
 @media (max-width: 600px) {
-  .stat { padding: 0.75rem 1.2rem; }
-  .stat-num { font-size: 1.2rem; }
+  .stat { padding: 0.7rem 1.1rem; }
   nav { padding: 0 1rem; }
-  main { padding: 1.25rem 1rem 4rem; }
-  .filters-section { padding: 1.25rem 1rem 0; }
+  main { padding: 1rem 1rem 4rem; }
+  .filters-bar { padding: 0 1rem; }
 }
 </style>
 </head>
@@ -370,9 +142,11 @@ footer a { color: var(--gold); text-decoration: none; }
     <div class="nav-logo">Taiwan Swing 🎷</div>
     <div class="nav-sub">台灣搖擺舞活動行事曆</div>
   </div>
-  <div class="nav-right">
-    <a class="nav-cal-btn" id="cal-subscribe-btn" href="#" target="_blank">＋ 訂閱行事曆</a>
-  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">活動總覽</a></li>
+    <li><a href="organizations.html">組織介紹</a></li>
+  </ul>
+  <a class="nav-cal-btn" href="https://calendar.google.com/calendar/r?cid=4a5afdd150defea45de935cae0c55f36feb3d093bd3d8151de32d7ff03b390db@group.calendar.google.com" target="_blank">＋ 訂閱行事曆</a>
 </nav>
 
 <div class="hero">
@@ -382,52 +156,30 @@ footer a { color: var(--gold); text-decoration: none; }
 </div>
 
 <div class="stats-bar">
-  <div class="stat">
-    <span class="stat-num" id="stat-events">—</span>
-    <span class="stat-label">近期活動</span>
-  </div>
-  <div class="stat">
-    <span class="stat-num">5</span>
-    <span class="stat-label">活躍城市</span>
-  </div>
-  <div class="stat">
-    <span class="stat-num" id="stat-orgs">—</span>
-    <span class="stat-label">組織團體</span>
-  </div>
-  <div class="stat">
-    <span class="stat-num">每週</span>
-    <span class="stat-label">持續更新</span>
-  </div>
+  <div class="stat"><span class="stat-num" id="stat-events">—</span><span class="stat-label">近期活動</span></div>
+  <div class="stat"><span class="stat-num">5</span><span class="stat-label">活躍城市</span></div>
+  <div class="stat"><span class="stat-num" id="stat-orgs">—</span><span class="stat-label">組織團體</span></div>
+  <div class="stat"><span class="stat-num">每週</span><span class="stat-label">持續更新</span></div>
 </div>
 
-<div class="filters-section">
-  <div class="filters-row">
-    <span class="filter-label">地區</span>
-    <button class="filter-btn active" onclick="filterArea('all', this)">全部</button>
-    <button class="filter-btn" onclick="filterArea('台北', this)">
-      <span class="dot" style="background:var(--taipei)"></span>台北
-    </button>
-    <button class="filter-btn" onclick="filterArea('新竹', this)">
-      <span class="dot" style="background:var(--hsinchu)"></span>新竹
-    </button>
-    <button class="filter-btn" onclick="filterArea('台中', this)">
-      <span class="dot" style="background:var(--taichung)"></span>台中
-    </button>
-    <button class="filter-btn" onclick="filterArea('台南', this)">
-      <span class="dot" style="background:var(--tainan)"></span>台南
-    </button>
-    <button class="filter-btn" onclick="filterArea('高雄', this)">
-      <span class="dot" style="background:var(--kaohsiung)"></span>高雄
-    </button>
+<div class="filters-bar">
+  <div class="filters-inner">
+    <div class="month-tabs" id="month-tabs"></div>
+    <div class="filter-divider"></div>
+    <div class="area-pills">
+      <button class="area-pill active" onclick="filterArea('all', this)">全部</button>
+      <button class="area-pill" onclick="filterArea('台北', this)"><span class="dot" style="background:var(--taipei)"></span>台北</button>
+      <button class="area-pill" onclick="filterArea('新竹', this)"><span class="dot" style="background:var(--hsinchu)"></span>新竹</button>
+      <button class="area-pill" onclick="filterArea('台中', this)"><span class="dot" style="background:var(--taichung)"></span>台中</button>
+      <button class="area-pill" onclick="filterArea('台南', this)"><span class="dot" style="background:var(--tainan)"></span>台南</button>
+      <button class="area-pill" onclick="filterArea('高雄', this)"><span class="dot" style="background:var(--kaohsiung)"></span>高雄</button>
+    </div>
   </div>
 </div>
 
 <main>
   <div id="app">
-    <div class="loading-state">
-      <div class="spinner"></div>
-      <p>載入活動資料中⋯</p>
-    </div>
+    <div class="loading-state"><div class="spinner"></div><p>載入活動資料中⋯</p></div>
   </div>
 </main>
 
@@ -437,174 +189,146 @@ footer a { color: var(--gold); text-decoration: none; }
 </footer>
 
 <script>
-// ================================================
-// 設定區（上線前填入你的行事曆網址）
-// ================================================
-const CALENDAR_ICAL_URL = 'https://calendar.google.com/calendar/ical/4a5afdd150defea45de935cae0c55f36feb3d093bd3d8151de32d7ff03b390db%40group.calendar.google.com/public/basic.ics';
+const WORKER_URL = 'https://swing-calendar-proxy.flyatwinds.workers.dev/';
+const MONTHS_EN  = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+const MONTHS_ZH  = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+const WEEKDAYS   = ['日','一','二','三','四','五','六'];
+const AREA_CLASS = { '台北':'taipei','新竹':'hsinchu','台中':'taichung','台南':'tainan','高雄':'kaohsiung' };
+const AREA_COLOR = { '台北':'var(--taipei)','新竹':'var(--hsinchu)','台中':'var(--taichung)','台南':'var(--tainan)','高雄':'var(--kaohsiung)' };
 
-const CAL_SUBSCRIBE_URL = 'https://calendar.google.com/calendar/r?cid=4a5afdd150defea45de935cae0c55f36feb3d093bd3d8151de32d7ff03b390db@group.calendar.google.com';
+let allEvents     = [];
+let currentMonth  = null; // null = 本週
+let currentArea   = 'all';
 
-// ================================================
-// 地區設定
-// ================================================
-const AREA_COLORS = {
-  '台北': 'taipei', '新竹': 'hsinchu',
-  '台中': 'taichung', '台南': 'tainan', '高雄': 'kaohsiung'
-};
-const AREA_DOT_COLORS = {
-  '台北': 'var(--taipei)', '新竹': 'var(--hsinchu)',
-  '台中': 'var(--taichung)', '台南': 'var(--tainan)', '高雄': 'var(--kaohsiung)'
-};
-const MONTHS_EN = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-const WEEKDAYS_ZH = ['日','一','二','三','四','五','六'];
-
-// ================================================
-// 全域狀態
-// ================================================
-let allEvents = [];
-let currentFilter = 'all';
-
-// ================================================
-// 解析 iCal 格式
-// ================================================
+// ── 解析 iCal ──
 function parseICal(text) {
   const events = [];
   const blocks = text.split('BEGIN:VEVENT');
   blocks.shift();
-
   blocks.forEach(block => {
-    const get = (key) => {
-      const patterns = [
-        new RegExp(`${key};[^:]*:([^\r\n]+)`),
-        new RegExp(`${key}:([^\r\n]+)`)
-      ];
-      for (const p of patterns) {
-        const m = block.match(p);
-        if (m) return m[1].trim();
-      }
-      return '';
+    const get = key => {
+      const m = block.match(new RegExp(`${key}(?:;[^:]*)?:([^\r\n]+)`));
+      return m ? m[1].trim() : '';
     };
-
-    const summary  = get('SUMMARY').replace(/\\,/g, ',').replace(/\\n/g, ' ');
-    const location = get('LOCATION').replace(/\\,/g, ',');
-    const desc     = get('DESCRIPTION').replace(/\\n/g, '\n').replace(/\\,/g, ',');
+    const summary  = get('SUMMARY').replace(/\\,/g,',').replace(/\\n/g,' ');
+    const location = get('LOCATION').replace(/\\,/g,',');
+    const desc     = get('DESCRIPTION').replace(/\\n/g,'\n').replace(/\\,/g,',');
     const dtstart  = get('DTSTART');
     const dtend    = get('DTEND');
-
     if (!summary || !dtstart) return;
 
-    // 解析日期
-    const parseDate = (s) => {
+    const parseDate = s => {
       if (!s) return null;
-      s = s.replace(/[TZ]/g, '').replace(/\s/g, '');
-      if (s.length === 8) {
-        return new Date(
-          parseInt(s.slice(0,4)),
-          parseInt(s.slice(4,6))-1,
-          parseInt(s.slice(6,8)),
-          0, 0, 0
-        );
-      }
-      return new Date(
-        parseInt(s.slice(0,4)),
-        parseInt(s.slice(4,6))-1,
-        parseInt(s.slice(6,8)),
-        parseInt(s.slice(8,10)||0),
-        parseInt(s.slice(10,12)||0)
-      );
+      s = s.replace(/[TZ]/g,'').replace(/\s/g,'');
+      if (s.length === 8) return new Date(+s.slice(0,4), +s.slice(4,6)-1, +s.slice(6,8));
+      return new Date(+s.slice(0,4), +s.slice(4,6)-1, +s.slice(6,8), +s.slice(8,10)||0, +s.slice(10,12)||0);
     };
-
     const start = parseDate(dtstart);
     const end   = parseDate(dtend);
     if (!start) return;
 
-    // 從 description 解析地區、組織、主題
-    const getDescField = (label) => {
-      const m = desc.match(new RegExp(`${label}[：:]([^\n]+)`));
-      return m ? m[1].trim() : '';
-    };
-
-    const area = getDescField('地區');
-    const org  = getDescField('組織');
-    const type = getDescField('主題');
-    const isAllDay = dtstart.length === 8;
-    const isMultiDay = isAllDay && end && (end - start) > 86400000;
-    const isPending = summary.includes('時間待確認');
+    const getField = label => { const m = desc.match(new RegExp(`${label}[：:]([^\n]+)`)); return m ? m[1].trim() : ''; };
+    const isAllDay   = dtstart.length === 8;
+    const isMultiDay = isAllDay && end && (end-start) > 86400000;
     const isFestival = summary.startsWith('📆');
+    const isPending  = summary.includes('時間待確認');
 
     events.push({
-      summary: summary.replace(/^[⏳📆\s]+/, '').replace('（時間待確認）', '').replace(/^\[.*?\]\s*/, ''),
-      location,
-      area,
-      org,
-      type,
-      start,
-      end,
-      isAllDay,
-      isMultiDay,
-      isPending,
-      isFestival
+      summary: summary.replace(/^[⏳📆\s]+/,'').replace('（時間待確認）','').replace(/^\[.*?\]\s*/,''),
+      location, area: getField('地區'), org: getField('組織'), type: getField('主題'),
+      start, end, isAllDay, isMultiDay, isFestival, isPending
     });
   });
-
-  return events.sort((a, b) => a.start - b.start);
+  return events.sort((a,b) => a.start - b.start);
 }
 
-// ================================================
-// 取得地區 class
-// ================================================
-function areaClass(area) {
-  return AREA_COLORS[area] || '';
+// ── 月份 tabs 初始化 ──
+function initMonthTabs() {
+  const today = new Date();
+  const tabs  = document.getElementById('month-tabs');
+  const months = [];
+
+  // 收集行事曆中有活動的月份（未來 6 個月）
+  const seen = new Set();
+  allEvents.forEach(e => {
+    if (e.isAllDay && !e.isFestival) return;
+    const key = `${e.start.getFullYear()}-${e.start.getMonth()}`;
+    if (!seen.has(key)) {
+      seen.add(key);
+      months.push({ year: e.start.getFullYear(), month: e.start.getMonth(), key });
+    }
+  });
+
+  // 排序，只取未來 6 個月
+  months.sort((a,b) => a.key.localeCompare(b.key));
+  const futureMonths = months.filter(m => {
+    const d = new Date(m.year, m.month, 1);
+    const limit = new Date(today.getFullYear(), today.getMonth()+6, 1);
+    return d >= new Date(today.getFullYear(), today.getMonth(), 1) && d < limit;
+  }).slice(0, 6);
+
+  // 「本週」tab
+  let html = `<button class="month-tab active" onclick="selectMonth(null, this)">本週</button>`;
+
+  futureMonths.forEach(m => {
+    const label = `${m.month+1}月`;
+    html += `<button class="month-tab" onclick="selectMonth('${m.key}', this)">${label}</button>`;
+  });
+
+  tabs.innerHTML = html;
 }
 
-// ================================================
-// 取得活動類型 badge
-// ================================================
-function typeBadge(type) {
+// ── 選擇月份 ──
+function selectMonth(key, btn) {
+  currentMonth = key;
+  document.querySelectorAll('.month-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderApp();
+}
+
+// ── 選擇地區 ──
+function filterArea(area, btn) {
+  currentArea = area;
+  document.querySelectorAll('.area-pill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderApp();
+}
+
+// ── badge ──
+function typeBadge(type, isPending) {
+  if (isPending) return `<span class="type-badge badge-tbd">⏳ 待確認</span>`;
   if (!type) return '';
   const t = type.toLowerCase();
   if (t.includes('social') || t.includes('小舞會')) return `<span class="type-badge badge-social">Social</span>`;
-  if (t.includes('festival') || t.includes('系列') || t.includes('大舞會') || t.includes('比賽')) return `<span class="type-badge badge-festival">大型活動</span>`;
-  if (t.includes('workshop') || t.includes('課')) return `<span class="type-badge badge-workshop">Workshop</span>`;
+  if (t.includes('festival')||t.includes('系列')||t.includes('大舞會')||t.includes('比賽')||t.includes('workshop')) return `<span class="type-badge badge-festival">大型活動</span>`;
   return `<span class="type-badge badge-other">${type}</span>`;
 }
 
-// ================================================
-// 格式化時間
-// ================================================
-function formatTime(date) {
-  if (!date) return '';
-  const h = String(date.getHours()).padStart(2,'0');
-  const m = String(date.getMinutes()).padStart(2,'0');
-  return `${h}:${m}`;
+// ── 格式化時間 ──
+function fmtTime(d) {
+  if (!d) return '';
+  return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
 }
 
-// ================================================
-// 渲染大型活動
-// ================================================
+// ── 渲染大型 Festival ──
 function renderFestivals(events) {
-  const today = new Date(); today.setHours(0,0,0,0);
-  const festivals = events.filter(e =>
-    e.isFestival && e.start >= today
-  ).slice(0, 6);
-
-  if (festivals.length === 0) return '';
-
+  const festivals = events.filter(e => e.isFestival);
+  if (!festivals.length) return '';
   const cards = festivals.map(e => {
-    const dateRange = e.isMultiDay && e.end
-      ? `${e.start.getMonth()+1}/${e.start.getDate()} – ${e.end.getMonth()+1}/${e.end.getDate()-1}`
+    const endDay = e.isMultiDay && e.end ? `${e.end.getMonth()+1}/${e.end.getDate()-1}` : '';
+    const dateStr = endDay
+      ? `${e.start.getMonth()+1}/${e.start.getDate()} – ${endDay}`
       : `${e.start.getMonth()+1}/${e.start.getDate()}`;
-
     return `
       <div class="festival-card">
         <div class="festival-date-block">
-          <div class="festival-month">${MONTHS_EN[e.start.getMonth()]}</div>
+          <div class="festival-month-label">${MONTHS_EN[e.start.getMonth()]}</div>
           <div class="festival-day">${e.start.getDate()}</div>
         </div>
         <div class="festival-info">
           <div class="festival-name">${e.summary}</div>
           <div class="festival-sub">
-            <span>📅 ${dateRange}</span>
+            <span>📅 ${dateStr}</span>
             ${e.location ? `<span>📍 ${e.location}</span>` : ''}
             ${e.isPending ? '<span>⏳ 時間待確認</span>' : ''}
           </div>
@@ -612,128 +336,147 @@ function renderFestivals(events) {
         ${e.area ? `<span class="festival-area-tag">${e.area}</span>` : ''}
       </div>`;
   }).join('');
+  return `<div class="festival-strip"><div class="festival-strip-title">🎪 大型活動</div><div class="festival-cards">${cards}</div></div>`;
+}
 
+// ── 渲染一張活動卡 ──
+function renderCard(e) {
+  const cls = AREA_CLASS[e.area] || '';
+  const dot = AREA_COLOR[e.area] || '#999';
+  const timeStr = e.isAllDay ? '全天' : `${fmtTime(e.start)} – ${fmtTime(e.end)}`;
   return `
-    <div class="festival-list">
-      <div class="section-title">大型活動搶先看</div>
-      ${cards}
+    <div class="event-card ${cls}">
+      <div class="event-area"><span class="area-dot" style="background:${dot}"></span>${e.area||''}</div>
+      <div class="event-name">${e.summary}</div>
+      <div class="event-org">${e.org||''}</div>
+      <div class="event-footer">
+        <span>🕐 ${timeStr}</span>
+        ${e.location ? `<span>📍 ${e.location}</span>` : ''}
+        ${typeBadge(e.type, e.isPending)}
+      </div>
     </div>`;
 }
 
-// ================================================
-// 渲染本週活動
-// ================================================
-function renderWeekEvents(events, filter) {
+// ── 渲染「本週」視圖 ──
+function renderThisWeek(events) {
   const today = new Date(); today.setHours(0,0,0,0);
-  const dayOfWeek = today.getDay();
-  const monday = new Date(today);
-  monday.setDate(today.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1));
-  const sunday = new Date(monday);
-  sunday.setDate(monday.getDate() + 6);
-  sunday.setHours(23,59,59);
+  const dow = today.getDay();
+  const mon = new Date(today); mon.setDate(today.getDate() - (dow===0?6:dow-1));
+  const sun = new Date(mon); sun.setDate(mon.getDate()+6); sun.setHours(23,59,59);
 
-  let filtered = events.filter(e =>
-    !e.isFestival && !e.isAllDay && e.start >= monday && e.start <= sunday
-  );
+  let filtered = events.filter(e => !e.isFestival && !e.isAllDay && e.start >= mon && e.start <= sun);
+  if (currentArea !== 'all') filtered = filtered.filter(e => e.area === currentArea);
 
-  if (filter !== 'all') {
-    filtered = filtered.filter(e => e.area === filter);
-  }
+  if (!filtered.length) return `<div class="no-events">本週暫無活動資料 🎷</div>`;
 
-  if (filtered.length === 0) {
-    return `<div class="no-events">本週${filter !== 'all' ? '・'+filter : ''}暫無活動資料</div>`;
-  }
-
-  // 按日期分組
   const byDate = {};
   filtered.forEach(e => {
-    const key = `${e.start.getFullYear()}-${String(e.start.getMonth()+1).padStart(2,'0')}-${String(e.start.getDate()).padStart(2,'0')}`;
-    if (!byDate[key]) byDate[key] = [];
-    byDate[key].push(e);
+    const k = `${e.start.getFullYear()}-${String(e.start.getMonth()+1).padStart(2,'0')}-${String(e.start.getDate()).padStart(2,'0')}`;
+    if (!byDate[k]) byDate[k] = [];
+    byDate[k].push(e);
   });
 
-  let html = '<div class="section-title">本週活動</div>';
-
-  Object.keys(byDate).sort().forEach(key => {
-    const parts = key.split('-');
-    const d = new Date(parseInt(parts[0]), parseInt(parts[1])-1, parseInt(parts[2]));
-    const dayEvents = byDate[key];
-
-    const cards = dayEvents.map(e => {
-      const cls = areaClass(e.area);
-      const dotColor = AREA_DOT_COLORS[e.area] || '#999';
-      const timeStr = e.isAllDay ? '全天' : `${formatTime(e.start)}–${formatTime(e.end)}`;
-      return `
-        <div class="event-card ${cls}">
-          <div class="event-area">
-            <span class="area-dot" style="background:${dotColor}"></span>
-            ${e.area || ''}
-          </div>
-          <div class="event-name">${e.summary}</div>
-          <div class="event-org">${e.org || ''}</div>
-          <div class="event-footer">
-            <span class="event-time">🕐 ${timeStr}</span>
-            ${e.location ? `<span class="event-venue">📍 ${e.location}</span>` : ''}
-            ${typeBadge(e.type)}
-          </div>
-        </div>`;
-    }).join('');
-
+  const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+  let html = '';
+  Object.keys(byDate).sort().forEach(k => {
+    const p = k.split('-');
+    const d = new Date(+p[0], +p[1]-1, +p[2]);
+    const isToday = k === todayStr;
     html += `
       <div class="week-section">
         <div class="week-header">
           <span class="week-date">${d.getMonth()+1} / ${d.getDate()}</span>
-          <span class="week-day">週${WEEKDAYS_ZH[d.getDay()]}</span>
-          <span class="week-count">${dayEvents.length} 個活動</span>
+          <span class="week-day">週${WEEKDAYS[d.getDay()]}</span>
+          ${isToday ? '<span class="today-badge">今天</span>' : ''}
+          <span class="week-count">${byDate[k].length} 個活動</span>
         </div>
-        <div class="events-grid">${cards}</div>
+        <div class="events-grid">${byDate[k].map(renderCard).join('')}</div>
       </div>`;
   });
-
   return html;
 }
 
-// ================================================
-// 渲染整頁
-// ================================================
-function render() {
+// ── 渲染「月份」視圖 ──
+function renderMonth(events, monthKey) {
+  const [year, month] = monthKey.split('-').map(Number);
+
+  let festivals = events.filter(e => e.isFestival && e.start.getFullYear()===year && e.start.getMonth()===month);
+  let regular   = events.filter(e => !e.isFestival && !e.isAllDay && e.start.getFullYear()===year && e.start.getMonth()===month);
+
+  if (currentArea !== 'all') {
+    festivals = festivals.filter(e => e.area === currentArea);
+    regular   = regular.filter(e => e.area === currentArea);
+  }
+
+  if (!festivals.length && !regular.length) {
+    return `<div class="no-events">${month+1}月暫無${currentArea!=='all'?currentArea+'的':''}活動資料 🎷</div>`;
+  }
+
+  const festHtml = festivals.length ? renderFestivals(festivals) : '';
+
+  const byDate = {};
+  regular.forEach(e => {
+    const k = `${e.start.getFullYear()}-${String(e.start.getMonth()+1).padStart(2,'0')}-${String(e.start.getDate()).padStart(2,'0')}`;
+    if (!byDate[k]) byDate[k] = [];
+    byDate[k].push(e);
+  });
+
+  let weekHtml = '';
+  Object.keys(byDate).sort().forEach(k => {
+    const p = k.split('-');
+    const d = new Date(+p[0], +p[1]-1, +p[2]);
+    weekHtml += `
+      <div class="week-section">
+        <div class="week-header">
+          <span class="week-date">${d.getMonth()+1} / ${d.getDate()}</span>
+          <span class="week-day">週${WEEKDAYS[d.getDay()]}</span>
+          <span class="week-count">${byDate[k].length} 個活動</span>
+        </div>
+        <div class="events-grid">${byDate[k].map(renderCard).join('')}</div>
+      </div>`;
+  });
+
+  return festHtml + weekHtml;
+}
+
+// ── 主渲染 ──
+function renderApp() {
   const app = document.getElementById('app');
-  const festivalHtml = renderFestivals(allEvents);
-  const weekHtml = renderWeekEvents(allEvents, currentFilter);
-  app.innerHTML = festivalHtml + weekHtml;
-
-  // 更新統計數字
   const today = new Date(); today.setHours(0,0,0,0);
-  const upcoming = allEvents.filter(e => e.start >= today && !e.isFestival && !e.isAllDay);
-  document.getElementById('stat-events').textContent = upcoming.length;
+  const future = allEvents.filter(e => e.start >= today);
 
+  let content = '';
+  if (currentMonth === null) {
+    // 本週視圖：上方顯示即將到來的大型活動
+    const upcomingFests = future.filter(e => e.isFestival).slice(0, 4);
+    const festHtml = upcomingFests.length ? renderFestivals(upcomingFests) : '';
+    const weekTitle = `<div class="month-header"><span class="month-title">本週活動<span>THIS WEEK</span></span><div class="month-line"></div></div>`;
+    content = festHtml + weekTitle + renderThisWeek(allEvents);
+  } else {
+    const [year, month] = currentMonth.split('-').map(Number);
+    const monthTitle = `<div class="month-header"><span class="month-title">${month+1} 月<span>${MONTHS_EN[month]} ${year}</span></span><div class="month-line"></div></div>`;
+    content = monthTitle + renderMonth(allEvents, currentMonth);
+  }
+
+  app.innerHTML = content;
+
+  // 更新統計
+  const upcoming = future.filter(e => !e.isFestival && !e.isAllDay);
+  document.getElementById('stat-events').textContent = upcoming.length;
   const orgs = new Set(allEvents.map(e => e.org).filter(Boolean));
   document.getElementById('stat-orgs').textContent = orgs.size;
 }
 
-// ================================================
-// 地區篩選
-// ================================================
-function filterArea(area, btn) {
-  currentFilter = area;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  render();
-}
-
-// ================================================
-// 載入行事曆資料
-// ================================================
+// ── 載入資料 ──
 async function loadCalendar() {
   const app = document.getElementById('app');
-  const WORKER_URL = 'https://swing-calendar-proxy.flyatwinds.workers.dev/';
-
   try {
     const res = await fetch(WORKER_URL);
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const text = await res.text();
     allEvents = parseICal(text);
-    render();
+    initMonthTabs();
+    renderApp();
   } catch (err) {
     app.innerHTML = `
       <div class="error-state">
@@ -744,10 +487,6 @@ async function loadCalendar() {
   }
 }
 
-// 設定訂閱連結
-document.getElementById('cal-subscribe-btn').href = CAL_SUBSCRIBE_URL;
-
-// 啟動
 loadCalendar();
 </script>
 </body>
